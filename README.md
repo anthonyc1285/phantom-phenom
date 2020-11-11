@@ -1,2 +1,2 @@
 # phantom-phenom
-General ideas
+General
