@@ -32,10 +32,6 @@ namespace FirstGame
             InitializeComponent();
         }
 
-
-
-
-
         private void MainGameTimerEvent(object sender, EventArgs e)
         {
             txtScore.Text = "Score: " + score;
@@ -71,8 +67,6 @@ namespace FirstGame
             {
                 if (x is PictureBox)
                 {
-                    
-
                     if((string)x.Tag == "platform")
                     {
                         if (player.Bounds.IntersectsWith(x.Bounds))
@@ -80,7 +74,7 @@ namespace FirstGame
                             force = 8;
                             player.Top = x.Top - player.Height;
 
-                            if((string)x.Name == "horizontalplatform" && goLeft == false || (string)x.Name == "horizontalplatform" && goRight == false)
+                            if ((string)x.Name == "horizontalplatform" && goLeft == false || (string)x.Name == "horizontalplatform" && goRight == false)
                             {
                                 player.Left -= horizontalSpeed;
                             }
@@ -111,20 +105,20 @@ namespace FirstGame
 
             horizontalplatform.Left -= horizontalSpeed;
 
-            if(horizontalplatform.Left < 0 || horizontalplatform.Left + horizontalplatform.Width > this.ClientSize.Width)
+            if (horizontalplatform.Left < 0 || horizontalplatform.Left + horizontalplatform.Width > this.ClientSize.Width)
             {
                 horizontalSpeed = -horizontalSpeed;
             }
 
             verticalplatform.Top += verticalSpeed;
 
-            if(verticalplatform.Top < 220 || verticalplatform.Top > 400)
+            if (verticalplatform.Top < 220 || verticalplatform.Top > 400)
             {
                 verticalSpeed = -verticalSpeed;
             }
 
             enemy1.Left -= enemyOneSpeed;
-            if(enemy1.Left < pictureBox4.Left || enemy1.Left + enemy1.Width > pictureBox4.Left + pictureBox4.Width)
+            if (enemy1.Left < pictureBox4.Left || enemy1.Left + enemy1.Width > pictureBox4.Left + pictureBox4.Width)
             {
                 enemyOneSpeed = -enemyOneSpeed;
             }
@@ -135,7 +129,7 @@ namespace FirstGame
                 enemyTwoSpeed = -enemyTwoSpeed;
             }
 
-            if(player.Top + player.Height > this.ClientSize.Height + 15)
+            if (player.Top + player.Height > this.ClientSize.Height + 50)
             {
                 gameTimer.Stop();
                 IsGameOver = true;
