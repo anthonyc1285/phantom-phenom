@@ -32,15 +32,9 @@ namespace FirstGame
             InitializeComponent();
         }
 
-        private void pictureBox7_Click(object sender, EventArgs e)
-        {
 
-        }
 
-        private void pictureBox19_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void MainGameTimerEvent(object sender, EventArgs e)
         {
@@ -85,20 +79,83 @@ namespace FirstGame
                         {
                             force = 8;
                             player.Top = x.Top - player.Height;
+
+                            if((string)x.Name == "horizontalplatform" && goLeft == false || (string)x.Name == "horizontalplatform" && goRight == false)
+                            {
+                                player.Left -= horizontalSpeed;
+                            }
                         }
                         x.BringToFront();
                     }
+                }
 
+                if ((string)x.Tag == "coin")
+                {
+                    if (player.Bounds.IntersectsWith(x.Bounds) && x.Visible == true)
+                    {
+                        x.Visible = false;
+                        score += 100;
+                    }
+                }
 
-
-
-
-
-
+                if ((string)x.Tag == "enemy")
+                {
+                    if (player.Bounds.IntersectsWith(x.Bounds))
+                    {
+                        gameTimer.Stop();
+                        IsGameOver = true;
+                        txtScore.Text = "Score: " + score + Environment.NewLine + "Game Over!";
+                    }
                 }
             }
 
+            horizontalplatform.Left -= horizontalSpeed;
+
+            if(horizontalplatform.Left < 0 || horizontalplatform.Left + horizontalplatform.Width > this.ClientSize.Width)
+            {
+                horizontalSpeed = -horizontalSpeed;
+            }
+
+            verticalplatform.Top += verticalSpeed;
+
+            if(verticalplatform.Top < 220 || verticalplatform.Top > 400)
+            {
+                verticalSpeed = -verticalSpeed;
+            }
+
+            enemy1.Left -= enemyOneSpeed;
+            if(enemy1.Left < pictureBox4.Left || enemy1.Left + enemy1.Width > pictureBox4.Left + pictureBox4.Width)
+            {
+                enemyOneSpeed = -enemyOneSpeed;
+            }
+
+            enemy2.Left -= enemyTwoSpeed;
+            if (enemy2.Left < platform1.Left || enemy2.Left + enemy2.Width > platform1.Left + platform1.Width)
+            {
+                enemyTwoSpeed = -enemyTwoSpeed;
+            }
+
+            if(player.Top + player.Height > this.ClientSize.Height + 15)
+            {
+                gameTimer.Stop();
+                IsGameOver = true;
+                txtScore.Text = "Score: " + score + Environment.NewLine + "Game Over!";
+            }
+
+            if (player.Bounds.IntersectsWith(door.Bounds) && score == 1400)
+            {
+                gameTimer.Stop();
+                IsGameOver = true;
+                txtScore.Text = "Score: " + score + Environment.NewLine + "You've won!";
+            }
+            else
+            {
+                txtScore.Text = "Score: " + score + Environment.NewLine + "Collect all coins!";
+            }
+
         }
+
+       
 
         private void KeyIsDown(object sender, KeyEventArgs e)
         {
