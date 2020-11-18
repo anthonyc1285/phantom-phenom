@@ -136,6 +136,16 @@ namespace FirstGame
                 txtScore.Text = "Score: " + score + Environment.NewLine + "Game Over!";
             }
 
+            if (player.Left + player.Width > this.ClientSize.Width)
+            {
+                player.Left = this.ClientSize.Width - player.Width;
+            }
+
+            if (player.Left < 0 || player.Left + player.Width > this.ClientSize.Width)
+            {
+                player.Left = 0;
+            }
+
             if (player.Bounds.IntersectsWith(door.Bounds) && score == 1400)
             {
                 gameTimer.Stop();
@@ -166,6 +176,8 @@ namespace FirstGame
                 jumping = true;
             }
 
+            
+
         }
 
         private void KeyIsUp(object sender, KeyEventArgs e)
@@ -194,6 +206,18 @@ namespace FirstGame
         private void RestartGame()
         {
 
+            player.Left = 55;
+            player.Top = 1141;
+
+            enemy1.Left = 692;
+            enemy1.Top = 743;
+
+            enemy2.Left = 653;
+            enemy2.Top = 1036;
+
+            horizontalplatform.Left = 313;
+            verticalplatform.Top = 537;
+
             jumping = false;
             goLeft = false;
             goRight = false;
@@ -202,27 +226,13 @@ namespace FirstGame
 
             txtScore.Text = "Score: " + score;
 
-            foreach(Control x in this.Controls)
+            foreach (Control x in this.Controls)
             {
                 if (x is PictureBox && x.Visible == false)
                 {
                     x.Visible = true;
                 }
             }
-
-            //reset the position of player, platform, and enemies
-
-            player.Left = 55;
-            player.Top = 1141;
-
-            enemy1.Left = 692;
-            enemy1.Top =  743;
-
-            enemy2.Left = 653;
-            enemy2.Top =  1036;
-
-            horizontalplatform.Left = 313; 
-            verticalplatform.Top = 537;
 
             gameTimer.Start();
 
