@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.txtScore = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.platform = new System.Windows.Forms.PictureBox();
+            this.platform1 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
@@ -60,7 +60,7 @@
             this.pictureBox22 = new System.Windows.Forms.PictureBox();
             this.gameTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.platform)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.platform1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -109,15 +109,15 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Tag = "platform";
             // 
-            // platform
+            // platform1
             // 
-            this.platform.BackColor = System.Drawing.Color.Maroon;
-            this.platform.Location = new System.Drawing.Point(313, 1082);
-            this.platform.Name = "platform";
-            this.platform.Size = new System.Drawing.Size(397, 30);
-            this.platform.TabIndex = 2;
-            this.platform.TabStop = false;
-            this.platform.Tag = "platform";
+            this.platform1.BackColor = System.Drawing.Color.Maroon;
+            this.platform1.Location = new System.Drawing.Point(313, 1082);
+            this.platform1.Name = "platform1";
+            this.platform1.Size = new System.Drawing.Size(397, 30);
+            this.platform1.TabIndex = 2;
+            this.platform1.TabStop = false;
+            this.platform1.Tag = "platform";
             // 
             // pictureBox3
             // 
@@ -168,7 +168,6 @@
             this.verticalplatform.TabIndex = 7;
             this.verticalplatform.TabStop = false;
             this.verticalplatform.Tag = "platform";
-            this.verticalplatform.Click += new System.EventHandler(this.pictureBox7_Click);
             // 
             // horizontalplatform
             // 
@@ -349,7 +348,6 @@
             this.pictureBox19.TabIndex = 27;
             this.pictureBox19.TabStop = false;
             this.pictureBox19.Tag = "coin";
-            this.pictureBox19.Click += new System.EventHandler(this.pictureBox19_Click);
             // 
             // pictureBox20
             // 
@@ -392,7 +390,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(798, 1244);
+            this.ClientSize = new System.Drawing.Size(797, 1258);
             this.Controls.Add(this.pictureBox22);
             this.Controls.Add(this.pictureBox18);
             this.Controls.Add(this.pictureBox19);
@@ -419,7 +417,7 @@
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.platform);
+            this.Controls.Add(this.platform1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.txtScore);
             this.Name = "Form1";
@@ -427,7 +425,7 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyIsDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyIsUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.platform)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.platform1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
@@ -462,7 +460,7 @@
 
         private System.Windows.Forms.Label txtScore;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox platform;
+        private System.Windows.Forms.PictureBox platform1;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox5;
