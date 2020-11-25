@@ -34,21 +34,21 @@ namespace FirstGame
 
         private void MainGameTimerEvent(object sender, EventArgs e)
         {
-            txtScore.Text = "Score: " + score;
+            txtScore.Text = "Score: " + score + Environment.NewLine + "Collect all coins";
 
             player.Top += jumpSpeed;
 
-            if(goLeft == true)
+            if (goLeft == true)
             {
                 player.Left -= playerSpeed;
             }
-            
-            if(goRight == true)
+
+            if (goRight == true)
             {
                 player.Left += playerSpeed;
             }
 
-            if(jumping == true && force < 0)
+            if (jumping == true && force < 0)
             {
                 jumping = false;
             }
@@ -67,7 +67,7 @@ namespace FirstGame
             {
                 if (x is PictureBox)
                 {
-                    if((string)x.Tag == "platform")
+                    if ((string)x.Tag == "platform")
                     {
                         if (player.Bounds.IntersectsWith(x.Bounds))
                         {
@@ -81,83 +81,85 @@ namespace FirstGame
                         }
                         x.BringToFront();
                     }
-                }
 
-                if ((string)x.Tag == "coin")
-                {
-                    if (player.Bounds.IntersectsWith(x.Bounds) && x.Visible == true)
+
+                    if ((string)x.Tag == "coin")
                     {
-                        x.Visible = false;
-                        score += 100;
+                        if (player.Bounds.IntersectsWith(x.Bounds) && x.Visible == true)
+                        {
+                            x.Visible = false;
+                            score += 100;
+                        }
+                    }
+
+                    if ((string)x.Tag == "enemy")
+                    {
+                        if (player.Bounds.IntersectsWith(x.Bounds))
+                        {
+                            
+                            IsGameOver = true;
+                            txtScore.Text = "Score: " + score + Environment.NewLine + "Game Over!";
+                            gameTimer.Stop();
+
+                        }
                     }
                 }
+            }
 
-                if ((string)x.Tag == "enemy")
+                horizontalplatform.Left -= horizontalSpeed;
+
+                if (horizontalplatform.Left < 0 || horizontalplatform.Left + horizontalplatform.Width > this.ClientSize.Width)
                 {
-                    if (player.Bounds.IntersectsWith(x.Bounds))
-                    {
-                        gameTimer.Stop();
-                        IsGameOver = true;
-                        txtScore.Text = "Score: " + score + Environment.NewLine + "Game Over!";
-                    }
+                    horizontalSpeed = -horizontalSpeed;
                 }
-            }
 
-            horizontalplatform.Left -= horizontalSpeed;
+                verticalplatform.Top += verticalSpeed;
 
-            if (horizontalplatform.Left < 0 || horizontalplatform.Left + horizontalplatform.Width > this.ClientSize.Width)
-            {
-                horizontalSpeed = -horizontalSpeed;
-            }
+                if (verticalplatform.Top < 220 || verticalplatform.Top > 400)
+                {
+                    verticalSpeed = -verticalSpeed;
+                }
 
-            verticalplatform.Top += verticalSpeed;
+                enemy1.Left -= enemyOneSpeed;
+                if (enemy1.Left < pictureBox4.Left || enemy1.Left + enemy1.Width > pictureBox4.Left + pictureBox4.Width)
+                {
+                    enemyOneSpeed = -enemyOneSpeed;
+                }
 
-            if (verticalplatform.Top < 220 || verticalplatform.Top > 400)
-            {
-                verticalSpeed = -verticalSpeed;
-            }
-
-            enemy1.Left -= enemyOneSpeed;
-            if (enemy1.Left < pictureBox4.Left || enemy1.Left + enemy1.Width > pictureBox4.Left + pictureBox4.Width)
-            {
-                enemyOneSpeed = -enemyOneSpeed;
-            }
-
-            enemy2.Left -= enemyTwoSpeed;
-            if (enemy2.Left < platform1.Left || enemy2.Left + enemy2.Width > platform1.Left + platform1.Width)
-            {
-                enemyTwoSpeed = -enemyTwoSpeed;
-            }
+                enemy2.Left -= enemyTwoSpeed;
+                if (enemy2.Left < platform1.Left || enemy2.Left + enemy2.Width > platform1.Left + platform1.Width)
+                {
+                    enemyTwoSpeed = -enemyTwoSpeed;
+                }
 
             if (player.Top + player.Height > this.ClientSize.Height + 50)
             {
-                gameTimer.Stop();
+                
                 IsGameOver = true;
                 txtScore.Text = "Score: " + score + Environment.NewLine + "Game Over!";
+                gameTimer.Stop();
+
             }
 
             if (player.Left + player.Width > this.ClientSize.Width)
-            {
-                player.Left = this.ClientSize.Width - player.Width;
-            }
+                {
+                    player.Left = this.ClientSize.Width - player.Width;
+                }
 
-            if (player.Left < 0 || player.Left + player.Width > this.ClientSize.Width)
-            {
-                player.Left = 0;
-            }
+                if (player.Left < 0 || player.Left + player.Width > this.ClientSize.Width)
+                {
+                    player.Left = 0;
+                }
 
-            if (player.Bounds.IntersectsWith(door.Bounds) && score == 1400)
-            {
-                gameTimer.Stop();
-                IsGameOver = true;
-                txtScore.Text = "Score: " + score + Environment.NewLine + "You've won!";
-            }
-            else
-            {
-                txtScore.Text = "Score: " + score + Environment.NewLine + "Collect all coins!";
-            }
+                if (player.Bounds.IntersectsWith(door.Bounds) && score == 1400)
+                {
+                    IsGameOver = true;
+                    txtScore.Text = "Score: " + score + Environment.NewLine + "You've won!";
+                    gameTimer.Stop();
+                }
 
-        }
+            }
+        
 
        
 
@@ -175,9 +177,6 @@ namespace FirstGame
             {
                 jumping = true;
             }
-
-            
-
         }
 
         private void KeyIsUp(object sender, KeyEventArgs e)
@@ -199,25 +198,14 @@ namespace FirstGame
             if (e.KeyCode == Keys.Enter && IsGameOver == true)
             {
                 RestartGame();
+
+               
             }
 
         }
 
         private void RestartGame()
         {
-
-            player.Left = 55;
-            player.Top = 1141;
-
-            enemy1.Left = 692;
-            enemy1.Top = 743;
-
-            enemy2.Left = 653;
-            enemy2.Top = 1036;
-
-            horizontalplatform.Left = 313;
-            verticalplatform.Top = 537;
-
             jumping = false;
             goLeft = false;
             goRight = false;
@@ -233,6 +221,11 @@ namespace FirstGame
                     x.Visible = true;
                 }
             }
+
+            player.Left = 55;
+            player.Top = 700;
+
+            horizontalplatform.Left = 313;
 
             gameTimer.Start();
 
