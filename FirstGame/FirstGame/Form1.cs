@@ -157,11 +157,17 @@ namespace FirstGame
                     txtScore.Text = "Score: " + score + Environment.NewLine + "You've won!";
                     gameTimer.Stop();
                 }
+                if (player.Bounds.IntersectsWith(door.Bounds) && score < 1400)
+                {
+                    txtScore.Text = "Score: " + score + Environment.NewLine + "You need more coins!";
+                }
 
             }
-        
 
-       
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void KeyIsDown(object sender, KeyEventArgs e)
         {
