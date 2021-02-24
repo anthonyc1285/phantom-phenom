@@ -27,10 +27,11 @@ namespace BulkFileConfigGenerator
         {
             var remote = remoteFileName.Text;
             var local = localFileName.Text;
-            var configTemplate = checkedListBulkFiles.Text;
+            var configTemplate = checkedListBulkFiles.Text; // probably need a case/switch that sets the ID based on the file type selected and plugs in the file name
+        
            
-
-            txtOutput.Text = configTemplate + " is working? " + remote + " is the RemoteFile, and " + local + " is the LocalFile.";
+            //need a foreach loop that creates output text for each item selected. 
+            txtOutput.Text = "<BulkFileItem> <BcpTimeout>PT0S</BcpTimeout> <ID>" + configTemplate + "</ID> <LocalFile>{13}\\" + local + "</LocalFile> <RemoteFIle>{0}\\" + remote + "</RemoteFile>"  ;
         }
 
         private void label_Click(object sender, EventArgs e)
