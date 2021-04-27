@@ -17,3 +17,10 @@ April 23, 2021
 - Researched how to return multiple items in the checkList
 - Thinking I need a case/switch that sets the file ID based on the file selected and plugs in the file name
 - Going to start small and just have the selections returned
+
+April 27, 2021
+- Attempted to create a foreach in the btnClick_Click for the checkList. Only returned the last item checked again
+- Was able to identify all Checked items using Items and GetItemChecked methods combined with a for loop.
+- Successfully returned the results of the for loop to the btnClick_Click result
+- Now I need to take each Item in the check list and return the actual config
+
