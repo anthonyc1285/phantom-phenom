@@ -24,3 +24,8 @@ April 27, 2021
 - Successfully returned the results of the for loop to the btnClick_Click result
 - Now I need to take each Item in the check list and return the actual config for that specific ID
 
+April 30, 2021
+ - Continued to add file IDs to btnClick_Click
+ - Figured I should also move this work to a method. Named it getBulkFileIDs
+ - Realized the for loop doesn't write out each item when selected. Added a while loop and created a StringBuilder to continue to add new strings based on the IDs checked
+ - There is likely a way to simplify this so I don't have to write out so much fo the bulk file item string. Need to research
