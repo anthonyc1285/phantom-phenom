@@ -23,10 +23,12 @@ namespace BulkFileConfigGenerator
            
         }
 
-        private void btnClick_Click(object sender, EventArgs e)
+        public void btnClick_Click(object sender, EventArgs e)
         {
-            var configTemplate = checkedListBulkFiles.Text;
-            getBulkFileIDs();
+            //var configTemplate = checkedListBulkFiles.Text;
+            var remote = remoteFileName.Text;
+            var local = localFileName.Text;
+            getBulkFileIDs(checkedListBulkFiles.Items.Count, remote, local);
            
         }
 
@@ -42,16 +44,14 @@ namespace BulkFileConfigGenerator
             
         }
 
-        public void getBulkFileIDs()
+        public void getBulkFileIDs(int items, string remote, string local)
         {
-            while(checkedListBulkFiles.Items.Count > 0)
+            while(items > 0)
             {
-                var remote = remoteFileName.Text;
-                var local = localFileName.Text;
                 var s = " ";
                 StringBuilder sb = new StringBuilder(s);
 
-                for (int i = 0; i <= (checkedListBulkFiles.Items.Count - 1); i++)
+                for (int i = 0; i <= (items - 1); i++)
                 {
                     if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "Relationship")
                     {
@@ -67,7 +67,7 @@ namespace BulkFileConfigGenerator
                             @"</BulkFileItem>" + "\n";
                         sb.Insert(s.Length - 1, relationship);
                     }
-                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "Advisor") //CHECK THE ID IN NEXUS
+                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "Advisor") 
                     {   
                         var advisor = @"<BulkFileItem>" + "\n" +
                            @"<BcpTimeout>PT0S</BcpTimeout>" + "\n" +
@@ -81,25 +81,11 @@ namespace BulkFileConfigGenerator
                            @"</BulkFileItem>" + "\n";
                         sb.Insert(s.Length - 1, advisor);
                     }
-                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "BankTransactions") //CHECK THE ID IN NEXUS
-                    {
-                        var bankTransactions = @"<BulkFileItem>" + "\n" +
-                           @"<BcpTimeout>PT0S</BcpTimeout>" + "\n" +
-                           @"<ID>Transactions</ID>" + "\n" +
-                           @"<LocalFile>{13}\" + local + @"\{3:MMddyyyy}_BankTransactions_" + local + @".txt</LocalFile>" + "\n" +
-                           @"<MaxRowsPerBatch i:nil=""true"" />" + "\n" +
-                           @"<Optional>false</Optional>" + "\n" +
-                           @"<RemoteFile>{0}\" + remote + @"\{3:MMddyyyy}_BankTransactions_" + remote + @".txt</RemoteFile>" + "\n" +
-                           @"<UploadFileDescription i:nil=""true"" />" + "\n" +
-                           @"<UploadFileName i:nil=""true"" />" + "\n" +
-                           @"</BulkFileItem>" + "\n";
-                        sb.Insert(s.Length - 1, bankTransactions);
-                    }
-                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "Client") //CHECK THE ID IN NEXUS
+                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "Client")
                     {
                         var client = @"<BulkFileItem>" + "\n" +
                            @"<BcpTimeout>PT0S</BcpTimeout>" + "\n" +
-                           @"<ID>Rep_Clients</ID>" + "\n" +
+                           @"<ID>Clients</ID>" + "\n" +
                            @"<LocalFile>{13}\" + local + @"\{3:MMddyyyy}_Client_" + local + @".txt</LocalFile>" + "\n" +
                            @"<MaxRowsPerBatch i:nil=""true"" />" + "\n" +
                            @"<Optional>false</Optional>" + "\n" +
@@ -109,6 +95,203 @@ namespace BulkFileConfigGenerator
                            @"</BulkFileItem>" + "\n";
                         sb.Insert(s.Length - 1, client);
                     }
+                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "InvestmentDepositAccounts")
+                    {
+                        var invDepAccount = @"<BulkFileItem>" + "\n" +
+                           @"<BcpTimeout>PT0S</BcpTimeout>" + "\n" +
+                           @"<ID>Accounts</ID>" + "\n" +
+                           @"<LocalFile>{13}\" + local + @"\{3:MMddyyyy}_InvestmentDepositAccounts_" + local + @".txt</LocalFile>" + "\n" +
+                           @"<MaxRowsPerBatch i:nil=""true"" />" + "\n" +
+                           @"<Optional>false</Optional>" + "\n" +
+                           @"<RemoteFile>{0}\" + remote + @"\{3:MMddyyyy}_InvestmentDepositAccounts_" + remote + @".txt</RemoteFile>" + "\n" +
+                           @"<UploadFileDescription i:nil=""true"" />" + "\n" +
+                           @"<UploadFileName i:nil=""true"" />" + "\n" +
+                           @"</BulkFileItem>" + "\n";
+                        sb.Insert(s.Length - 1, invDepAccount);
+                    }
+                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "LifeInsuranceAnnuity")
+                    {
+                        var lifeInsAnnuityAccount = @"<BulkFileItem>" + "\n" +
+                           @"<BcpTimeout>PT0S</BcpTimeout>" + "\n" +
+                           @"<ID>Accounts</ID>" + "\n" +
+                           @"<LocalFile>{13}\" + local + @"\{3:MMddyyyy}_LifeInsAnnuityAccounts_" + local + @".txt</LocalFile>" + "\n" +
+                           @"<MaxRowsPerBatch i:nil=""true"" />" + "\n" +
+                           @"<Optional>false</Optional>" + "\n" +
+                           @"<RemoteFile>{0}\" + remote + @"\{3:MMddyyyy}_LifeInsAnnuityAccounts_" + remote + @".txt</RemoteFile>" + "\n" +
+                           @"<UploadFileDescription i:nil=""true"" />" + "\n" +
+                           @"<UploadFileName i:nil=""true"" />" + "\n" +
+                           @"</BulkFileItem>" + "\n";
+                        sb.Insert(s.Length - 1, lifeInsAnnuityAccount);
+                    }
+                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "PandCInsAccounts")
+                    {
+                        var propCasInsAccount = @"<BulkFileItem>" + "\n" +
+                           @"<BcpTimeout>PT0S</BcpTimeout>" + "\n" +
+                           @"<ID>Accounts</ID>" + "\n" +
+                           @"<LocalFile>{13}\" + local + @"\{3:MMddyyyy}_PandCInsAccounts_" + local + @".txt</LocalFile>" + "\n" +
+                           @"<MaxRowsPerBatch i:nil=""true"" />" + "\n" +
+                           @"<Optional>false</Optional>" + "\n" +
+                           @"<RemoteFile>{0}\" + remote + @"\{3:MMddyyyy}_PandCInsAccounts_" + remote + @".txt</RemoteFile>" + "\n" +
+                           @"<UploadFileDescription i:nil=""true"" />" + "\n" +
+                           @"<UploadFileName i:nil=""true"" />" + "\n" +
+                           @"</BulkFileItem>" + "\n";
+                        sb.Insert(s.Length - 1, propCasInsAccount);
+                    }
+                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "PersonalPropertyAccounts")
+                    {
+                        var personalPropAccount = @"<BulkFileItem>" + "\n" +
+                           @"<BcpTimeout>PT0S</BcpTimeout>" + "\n" +
+                           @"<ID>Accounts</ID>" + "\n" +
+                           @"<LocalFile>{13}\" + local + @"\{3:MMddyyyy}_PersonalPropertyAccounts_" + local + @".txt</LocalFile>" + "\n" +
+                           @"<MaxRowsPerBatch i:nil=""true"" />" + "\n" +
+                           @"<Optional>false</Optional>" + "\n" +
+                           @"<RemoteFile>{0}\" + remote + @"\{3:MMddyyyy}_PersonalPropertyAccounts_" + remote + @".txt</RemoteFile>" + "\n" +
+                           @"<UploadFileDescription i:nil=""true"" />" + "\n" +
+                           @"<UploadFileName i:nil=""true"" />" + "\n" +
+                           @"</BulkFileItem>" + "\n";
+                        sb.Insert(s.Length - 1, personalPropAccount);
+                    }
+                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "RealEstateAccounts")
+                    {
+                        var realEstateAccount = @"<BulkFileItem>" + "\n" +
+                           @"<BcpTimeout>PT0S</BcpTimeout>" + "\n" +
+                           @"<ID>Accounts</ID>" + "\n" +
+                           @"<LocalFile>{13}\" + local + @"\{3:MMddyyyy}_RealEstateAccounts_" + local + @".txt</LocalFile>" + "\n" +
+                           @"<MaxRowsPerBatch i:nil=""true"" />" + "\n" +
+                           @"<Optional>false</Optional>" + "\n" +
+                           @"<RemoteFile>{0}\" + remote + @"\{3:MMddyyyy}_RealEstateAccounts_" + remote + @".txt</RemoteFile>" + "\n" +
+                           @"<UploadFileDescription i:nil=""true"" />" + "\n" +
+                           @"<UploadFileName i:nil=""true"" />" + "\n" +
+                           @"</BulkFileItem>" + "\n";
+                        sb.Insert(s.Length - 1, realEstateAccount);
+                    }
+                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "StockOptionsAccounts")
+                    {
+                        var stockOpAccount = @"<BulkFileItem>" + "\n" +
+                           @"<BcpTimeout>PT0S</BcpTimeout>" + "\n" +
+                           @"<ID>Accounts</ID>" + "\n" +
+                           @"<LocalFile>{13}\" + local + @"\{3:MMddyyyy}_StockOptionsAccounts_" + local + @".txt</LocalFile>" + "\n" +
+                           @"<MaxRowsPerBatch i:nil=""true"" />" + "\n" +
+                           @"<Optional>false</Optional>" + "\n" +
+                           @"<RemoteFile>{0}\" + remote + @"\{3:MMddyyyy}_StockOptionsAccounts_" + remote + @".txt</RemoteFile>" + "\n" +
+                           @"<UploadFileDescription i:nil=""true"" />" + "\n" +
+                           @"<UploadFileName i:nil=""true"" />" + "\n" +
+                           @"</BulkFileItem>" + "\n";
+                        sb.Insert(s.Length - 1, stockOpAccount);
+                    }
+                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "StockOptionsGrants")
+                    {
+                        var stockOpGrant = @"<BulkFileItem>" + "\n" +
+                           @"<BcpTimeout>PT0S</BcpTimeout>" + "\n" +
+                           @"<ID>Accounts</ID>" + "\n" +
+                           @"<LocalFile>{13}\" + local + @"\{3:MMddyyyy}_StockOptionsGrants_" + local + @".txt</LocalFile>" + "\n" +
+                           @"<MaxRowsPerBatch i:nil=""true"" />" + "\n" +
+                           @"<Optional>false</Optional>" + "\n" +
+                           @"<RemoteFile>{0}\" + remote + @"\{3:MMddyyyy}_StockOptionsGrants_" + remote + @".txt</RemoteFile>" + "\n" +
+                           @"<UploadFileDescription i:nil=""true"" />" + "\n" +
+                           @"<UploadFileName i:nil=""true"" />" + "\n" +
+                           @"</BulkFileItem>" + "\n";
+                        sb.Insert(s.Length - 1, stockOpGrant);
+                    }
+                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "VehicleInsAccounts")
+                    {
+                        var vehicleInsAccount = @"<BulkFileItem>" + "\n" +
+                           @"<BcpTimeout>PT0S</BcpTimeout>" + "\n" +
+                           @"<ID>Accounts</ID>" + "\n" +
+                           @"<LocalFile>{13}\" + local + @"\{3:MMddyyyy}_VehicleInsAccounts_" + local + @".txt</LocalFile>" + "\n" +
+                           @"<MaxRowsPerBatch i:nil=""true"" />" + "\n" +
+                           @"<Optional>false</Optional>" + "\n" +
+                           @"<RemoteFile>{0}\" + remote + @"\{3:MMddyyyy}_VehicleInsAccounts_" + remote + @".txt</RemoteFile>" + "\n" +
+                           @"<UploadFileDescription i:nil=""true"" />" + "\n" +
+                           @"<UploadFileName i:nil=""true"" />" + "\n" +
+                           @"</BulkFileItem>" + "\n";
+                        sb.Insert(s.Length - 1, vehicleInsAccount);
+                    }
+                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "DisabilityInsurance")
+                    {
+                        var disInsAccount = @"<BulkFileItem>" + "\n" +
+                           @"<BcpTimeout>PT0S</BcpTimeout>" + "\n" +
+                           @"<ID>Accounts</ID>" + "\n" +
+                           @"<LocalFile>{13}\" + local + @"\{3:MMddyyyy}_DisabilityInsurance_" + local + @".txt</LocalFile>" + "\n" +
+                           @"<MaxRowsPerBatch i:nil=""true"" />" + "\n" +
+                           @"<Optional>false</Optional>" + "\n" +
+                           @"<RemoteFile>{0}\" + remote + @"\{3:MMddyyyy}_DisabilityInsurance_" + remote + @".txt</RemoteFile>" + "\n" +
+                           @"<UploadFileDescription i:nil=""true"" />" + "\n" +
+                           @"<UploadFileName i:nil=""true"" />" + "\n" +
+                           @"</BulkFileItem>" + "\n";
+                        sb.Insert(s.Length - 1, disInsAccount);
+                    }
+                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "MedicalInsurance")
+                    {
+                        var medInsAccount = @"<BulkFileItem>" + "\n" +
+                           @"<BcpTimeout>PT0S</BcpTimeout>" + "\n" +
+                           @"<ID>Accounts</ID>" + "\n" +
+                           @"<LocalFile>{13}\" + local + @"\{3:MMddyyyy}_MedicalInsurance_" + local + @".txt</LocalFile>" + "\n" +
+                           @"<MaxRowsPerBatch i:nil=""true"" />" + "\n" +
+                           @"<Optional>false</Optional>" + "\n" +
+                           @"<RemoteFile>{0}\" + remote + @"\{3:MMddyyyy}_MedicalInsurance_" + remote + @".txt</RemoteFile>" + "\n" +
+                           @"<UploadFileDescription i:nil=""true"" />" + "\n" +
+                           @"<UploadFileName i:nil=""true"" />" + "\n" +
+                           @"</BulkFileItem>" + "\n";
+                        sb.Insert(s.Length - 1, medInsAccount);
+                    }
+                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "LiabilityAccounts")
+                    {
+                        var liabilityAccount = @"<BulkFileItem>" + "\n" +
+                           @"<BcpTimeout>PT0S</BcpTimeout>" + "\n" +
+                           @"<ID>Loan_Accounts</ID>" + "\n" +
+                           @"<LocalFile>{13}\" + local + @"\{3:MMddyyyy}_LiabilityAccounts_" + local + @".txt</LocalFile>" + "\n" +
+                           @"<MaxRowsPerBatch i:nil=""true"" />" + "\n" +
+                           @"<Optional>false</Optional>" + "\n" +
+                           @"<RemoteFile>{0}\" + remote + @"\{3:MMddyyyy}_LiabilityAccounts_" + remote + @".txt</RemoteFile>" + "\n" +
+                           @"<UploadFileDescription i:nil=""true"" />" + "\n" +
+                           @"<UploadFileName i:nil=""true"" />" + "\n" +
+                           @"</BulkFileItem>" + "\n";
+                        sb.Insert(s.Length - 1, liabilityAccount);
+                    }
+                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "Holdings")
+                    {
+                        var holdings = @"<BulkFileItem>" + "\n" +
+                           @"<BcpTimeout>PT0S</BcpTimeout>" + "\n" +
+                           @"<ID>Holdings</ID>" + "\n" +
+                           @"<LocalFile>{13}\" + local + @"\{3:MMddyyyy}_Holdings_" + local + @".txt</LocalFile>" + "\n" +
+                           @"<MaxRowsPerBatch i:nil=""true"" />" + "\n" +
+                           @"<Optional>false</Optional>" + "\n" +
+                           @"<RemoteFile>{0}\" + remote + @"\{3:MMddyyyy}_Holdings_" + remote + @".txt</RemoteFile>" + "\n" +
+                           @"<UploadFileDescription i:nil=""true"" />" + "\n" +
+                           @"<UploadFileName i:nil=""true"" />" + "\n" +
+                           @"</BulkFileItem>" + "\n";
+                        sb.Insert(s.Length - 1, holdings);
+                    }
+                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "BankTransactions") 
+                    {
+                        var bankTransactions = @"<BulkFileItem>" + "\n" +
+                           @"<BcpTimeout>PT0S</BcpTimeout>" + "\n" +
+                           @"<ID>Bank_Transactions</ID>" + "\n" +
+                           @"<LocalFile>{13}\" + local + @"\{3:MMddyyyy}_BankTransactions_" + local + @".txt</LocalFile>" + "\n" +
+                           @"<MaxRowsPerBatch i:nil=""true"" />" + "\n" +
+                           @"<Optional>false</Optional>" + "\n" +
+                           @"<RemoteFile>{0}\" + remote + @"\{3:MMddyyyy}_BankTransactions_" + remote + @".txt</RemoteFile>" + "\n" +
+                           @"<UploadFileDescription i:nil=""true"" />" + "\n" +
+                           @"<UploadFileName i:nil=""true"" />" + "\n" +
+                           @"</BulkFileItem>" + "\n";
+                        sb.Insert(s.Length - 1, bankTransactions);
+                    }
+                    else if (checkedListBulkFiles.GetItemChecked(i) && checkedListBulkFiles.Items[i].ToString() == "InvestmentTransactions")
+                    {
+                        var invTransactions = @"<BulkFileItem>" + "\n" +
+                           @"<BcpTimeout>PT0S</BcpTimeout>" + "\n" +
+                           @"<ID>Investment_Transactions</ID>" + "\n" +
+                           @"<LocalFile>{13}\" + local + @"\{3:MMddyyyy}_InvestmentTransactions" + local + @".txt</LocalFile>" + "\n" +
+                           @"<MaxRowsPerBatch i:nil=""true"" />" + "\n" +
+                           @"<Optional>false</Optional>" + "\n" +
+                           @"<RemoteFile>{0}\" + remote + @"\{3:MMddyyyy}_InvestmentTransactions_" + remote + @".txt</RemoteFile>" + "\n" +
+                           @"<UploadFileDescription i:nil=""true"" />" + "\n" +
+                           @"<UploadFileName i:nil=""true"" />" + "\n" +
+                           @"</BulkFileItem>" + "\n";
+                        sb.Insert(s.Length - 1, invTransactions);
+                    }
+                    
 
                 }
 
