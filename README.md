@@ -29,3 +29,9 @@ April 30, 2021
  - Figured I should also move this work to a method. Named it getBulkFileIDs
  - Realized the for loop doesn't write out each item when selected. Added a while loop and created a StringBuilder to continue to add new strings based on the IDs checked
  - There is likely a way to simplify this so I don't have to write out so much fo the bulk file item string. Need to research
+
+May 7, 2021
+- Finished adding remaining Bulk File Items to getBulkFileIDs()
+- Simplified getBulkFileIDs() by adding arguments that takes the number of checked items and two strings for the remote and local file names
+- Simplifying the method will help me add a class for this later on
+- I still think there is an easier way to print out each ID. I likely need one "standard" string and then toss in the variable information to it - then loop back and add another string with the relevant information. 
