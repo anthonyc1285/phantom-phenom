@@ -35,3 +35,10 @@ May 7, 2021
 - Simplified getBulkFileIDs() by adding arguments that takes the number of checked items and two strings for the remote and local file names
 - Simplifying the method will help me add a class for this later on
 - I still think there is an easier way to print out each ID. I likely need one "standard" string and then toss in the variable information to it - then loop back and add another string with the relevant information. 
+
+May 13, 2021
+- checkedList automatically lists items alphabetically. I want them in a specific order. Will need to research
+- Tried to simplify the string but I ran into issues setting variables using an if statement within a for loop. At the moment the output is what I want it to be so this can be put on hold for now
+- Formatting the txtoutput. Set Multiline and WordWrap to true. For all objects, I adjusted the boundaries and location on the form for all objects
+- Changes are small so I won't push to main branch yet
+- 
